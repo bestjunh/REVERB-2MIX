@@ -14,7 +14,8 @@ end
 
 WSJ_dir = [nasPath 'user/byungjoon/DB/REVERB/wsjcam0/']
 REVERB_dir = [nasPath 'user/byungjoon/DB/REVERB/']
+REVERB2MIX_dir = './REVERB_2MIX/';
 
 tic
-CreateREVERB2MIX(WSJ_dir, REVERB_dir)
+CreateREVERB2MIX(WSJ_dir, REVERB_dir, REVERB2MIX_dir)
 toc
