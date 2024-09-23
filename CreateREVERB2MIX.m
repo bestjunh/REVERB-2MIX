@@ -1,4 +1,4 @@
-function CreateREVERB2MIX(WSJ_dir, REVERB_dir)
+function CreateREVERB2MIX(WSJ_dir, REVERB_dir, REVERB2MIX_dir)
 %
 % Input variables:
 %    WSJ_dir: string name of user's clean wsjcam0 corpus directory 
@@ -17,7 +17,7 @@ function CreateREVERB2MIX(WSJ_dir, REVERB_dir)
 WSJ_dir=addslash(WSJ_dir);
 REVERB_dir=addslash(REVERB_dir);
 
-REVERB2MIX_dir = './REVERB_2MIX/';
+
 
 display(['Name of directory for original WSJCAM0: ',WSJ_dir])
 display(['Name of directory for original REVERB: ',REVERB_dir])
