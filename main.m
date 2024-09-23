@@ -1,4 +1,4 @@
-clear;
+clear all;
 
 if ispc
     nasPath = 'Z:/nas1_data/';
@@ -14,7 +14,7 @@ end
 
 WSJ_dir = [nasPath 'user/byungjoon/DB/REVERB/wsjcam0/']
 REVERB_dir = [nasPath 'user/byungjoon/DB/REVERB/']
-REVERB2MIX_dir = './REVERB_2MIX/';
+REVERB2MIX_dir = [devDataPath '/albert/DB/REVERB_2MIX/'];
 
 tic
 CreateREVERB2MIX(WSJ_dir, REVERB_dir, REVERB2MIX_dir)

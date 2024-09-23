@@ -1,4 +1,4 @@
-function Create_REVERB2MIX(REVERB_dir_name, REVERB2MIX_dir_name)
+function Generate_realDataMix_et(REVERB_dir_name, REVERB2MIX_dir_name)
 %
 % Input variables:
 %    WSJ_dir_name: string name of user's clean wsjcam0 corpus directory 
