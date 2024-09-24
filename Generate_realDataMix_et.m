@@ -16,6 +16,10 @@ function Generate_realDataMix_et(REVERB_dir_name, REVERB2MIX_dir_name)
 
 rev_root=REVERB_dir_name;
 revmix_root=REVERB2MIX_dir_name;
+
+revmix_root_et = [revmix_root 'et/'];
+revmix_root_dt = [revmix_root 'dt/'];
+
 rev_conditions = {'real_far_room1','real_near_room1'};
 
 sfreq = 16000;
@@ -28,8 +32,10 @@ for kk = 1:length(rev_conditions)
   for ii = 1:length(K)
     akey = K{ii};
     disp(['Processing: ' num2str(ii) '/' num2str(length(K)) ' ' num2str(kk) '/' num2str(length(rev_conditions))]);
-    x_et = addwav(readwav(et, akey, rev_root), readwav(dt, akey, rev_root));
-    savewav(x_et, [revmix_root et{1}(akey)], sfreq);
+    [x_mix,x_et,x_dt] = addwav(readwav(et, akey, rev_root), readwav(dt, akey, rev_root));
+    savewav(x_mix, [revmix_root et{1}(akey)], sfreq);
+    savewav(x_et, [revmix_root_et et{1}(akey)], sfreq);
+    savewav(x_dt, [revmix_root_dt et{1}(akey)], sfreq);
   end
 end
 
@@ -76,12 +82,13 @@ function x = soundread(fname)
   x = audioread(fname);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
-function x_et = addwav(x_et, x_dt)
+function [x_mix,x_et,x_dt] = addwav(x_et, x_dt)
 if length(x_et) > length(x_dt)
-  x_et(1:length(x_dt),:) = x_et(1:length(x_dt),:) + x_dt;
+  x_et = x_et(1:length(x_dt),:);
 else
-  x_et = x_et + x_dt(1:length(x_et),:);
+  x_dt = x_dt(1:length(x_et),:);
 end
+x_mix=x_et+x_dt;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 function savewav(x, fname, sfreq)

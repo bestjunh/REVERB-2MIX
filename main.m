@@ -7,15 +7,15 @@ if ispc
 elseif isunix
     nasPath = '/home/nas/';
     nas3Path = '/home/nas3/';
-    devDataPath = '/home/dev60-data-mount/';
-    % devDataPath = '/home/data/'; % for dev60
+    % devDataPath = '/home/dev60-data-mount/';
+    devDataPath = '/home/data/'; % for dev60
 else
     disp('Unknown operating system.');
 end
 
 WSJ_dir = [nasPath 'user/byungjoon/DB/REVERB/wsjcam0/']
 REVERB_dir = [nasPath 'user/byungjoon/DB/REVERB/']
-REVERB2MIX_dir = [devDataPath '/albert/DB/REVERB-2MIX/']
+REVERB2MIX_dir = [devDataPath '/albert/DB/REVERB-2MIX_et_dt/']
 
 tic
 CreateREVERB2MIX(WSJ_dir, REVERB_dir, REVERB2MIX_dir)
