@@ -72,7 +72,7 @@ end
 function x = soundread(fname)
   fname = strrep(fname, 'MC_WSJ_AV_Dev', 'REVERB_Real_dt_et');
   fname = strrep(fname, 'MC_WSJ_AV_Eval', 'REVERB_Real_dt_et');
-  disp(['Reading: ',fname]);    
+  % disp(['Reading: ',fname]);    
   x = audioread(fname);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
