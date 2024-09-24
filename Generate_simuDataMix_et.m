@@ -36,14 +36,40 @@ if save_dir(end)=='/';
     save_dir_near=[save_dir,'REVERB_WSJCAM0_et/data/near_test/'];
     save_dir_far=[save_dir,'REVERB_WSJCAM0_et/data/far_test/'];
     save_dir_cln=[save_dir,'REVERB_WSJCAM0_et/data/cln_test/'];
+
+    save_dir_near_et=[save_dir,'et/REVERB_WSJCAM0_et/data/near_test/'];
+    save_dir_far_et=[save_dir,'et/REVERB_WSJCAM0_et/data/far_test/'];
+    save_dir_cln_et=[save_dir,'et/REVERB_WSJCAM0_et/data/cln_test/'];
+
+    save_dir_near_dt=[save_dir,'dt/REVERB_WSJCAM0_et/data/near_test/'];
+    save_dir_far_dt=[save_dir,'dt/REVERB_WSJCAM0_et/data/far_test/'];
+    save_dir_cln_dt=[save_dir,'dt/REVERB_WSJCAM0_et/data/cln_test/'];
 else
     save_dir_near=[save_dir,'/REVERB_WSJCAM0_et/data/near_test/'];  
     save_dir_far=[save_dir,'/REVERB_WSJCAM0_et/data/far_test/'];
     save_dir_cln=[save_dir,'/REVERB_WSJCAM0_et/data/cln_test/'];
+
+    save_dir_near_et=[save_dir,'/et/REVERB_WSJCAM0_et/data/near_test/'];
+    save_dir_far_et=[save_dir,'/et/REVERB_WSJCAM0_et/data/far_test/'];
+    save_dir_cln_et=[save_dir,'/et/REVERB_WSJCAM0_et/data/cln_test/'];
+
+    save_dir_near_dt=[save_dir,'/dt/REVERB_WSJCAM0_et/data/near_test/'];
+    save_dir_far_dt=[save_dir,'/dt/REVERB_WSJCAM0_et/data/far_test/'];
+    save_dir_cln_dt=[save_dir,'/dt/REVERB_WSJCAM0_et/data/cln_test/'];
+
 end
 mkdir([save_dir_near]);
 mkdir([save_dir_far]);
 mkdir([save_dir_cln]);
+
+mkdir([save_dir_near_et]);
+mkdir([save_dir_far_et]);
+mkdir([save_dir_cln_et]);
+
+mkdir([save_dir_near_dt]);
+mkdir([save_dir_far_dt]);
+mkdir([save_dir_cln_dt]);
+
 
 %
 % Start generating noisy reverberant data with creating new directories
@@ -61,12 +87,16 @@ for i=1:2 % i=1 corresponds to "near" and i=2 to "far"
         RIR_sim2='./RIR/RIR_SimRoom2_near_AnglB.wav';   % RT:0.5
         RIR_sim3='./RIR/RIR_SimRoom3_near_AnglB.wav';   % RT:0.7
         save_dir_i=save_dir_near;
+        save_dir_i_et=save_dir_near_et;
+        save_dir_i_dt=save_dir_near_dt;
     elseif i==2
         % List of RIRs
         RIR_sim1='./RIR/RIR_SimRoom1_far_AnglB.wav'; % RIR_Ermtg_short_near_AnglA.wav
         RIR_sim2='./RIR/RIR_SimRoom2_far_AnglB.wav';   % RT:0.5
         RIR_sim3='./RIR/RIR_SimRoom3_far_AnglB.wav';        
         save_dir_i=save_dir_far;
+        save_dir_i_et=save_dir_far_et;
+        save_dir_i_dt=save_dir_far_dt;
     end
 
     if i==1
@@ -113,6 +143,8 @@ for i=1:2 % i=1 corresponds to "near" and i=2 to "far"
             % Make directory if there isn't any
             if ~strcmp(prev_fname,fname(1:idx1(end)))
                 mkdir([save_dir_i fname(1:idx1(end))])
+                mkdir([save_dir_i_et fname(1:idx1(end))])
+                mkdir([save_dir_i_dt fname(1:idx1(end))])
    	        if i==1;mkdir([save_dir_cln,fname(1:idx1(end))]);end% make directory for clean wav files
             end
             prev_fname=fname(1:idx1(end));
@@ -131,11 +163,12 @@ for i=1:2 % i=1 corresponds to "near" and i=2 to "far"
             eval(['RIRjam=wavread_gen(RIR_jam',num2str(rcount),');']);
 
             % Generate 8ch noisy reverberant data        
-            [y]=gen_obs_mix(x,RIR,xjam,RIRjam,NOISE,SNRdB,name_rule(1));
+            [y,s]=gen_obs_mix(x,RIR,xjam,RIRjam,NOISE,SNRdB,name_rule(1));
 
             % save reverberant speech y
             y=y/4; % common normalization to all the data to prevent clipping
                    % denominator was decided experimentally
+            s=s/4;
 
             data_amount(1,rcount)=data_amount(1,rcount)+length(y);
 
@@ -145,6 +178,8 @@ for i=1:2 % i=1 corresponds to "near" and i=2 to "far"
                 end
             else % save all 8ch data to a single wav file
                 wavwrite_gen(y(:,name_rule),16000,[save_dir_i fname '_ch' num2str(1) '.wav']);
+                wavwrite_gen(s(:,name_rule,1),16000,[save_dir_i_et fname '_ch' num2str(1) '.wav']);
+                wavwrite_gen(s(:,name_rule,2),16000,[save_dir_i_dt fname '_ch' num2str(1) '.wav']);
             end
             display(['sentence ',num2str(fcount),' (out of 1088) finished! Saved under ',save_dir_i,' (Evaluation test set)'])
 
@@ -168,7 +203,7 @@ end
 
 
 %%%%
-function [y,M]=gen_obs_mix(x,RIR,xjam,RIR_jam,NOISE,SNRdB,ref_ch)
+function [y,r1tmp]=gen_obs_mix(x,RIR,xjam,RIR_jam,NOISE,SNRdB,ref_ch)
 % function to generate noisy reverberant data
 
 x=x';
