@@ -27,6 +27,7 @@ for kk = 1:length(rev_conditions)
   K = keys(et{1});
   for ii = 1:length(K)
     akey = K{ii};
+    disp(['Processing: ' num2str(ii) '/' num2str(length(K)) ' ' num2str(kk) '/' num2str(length(rev_conditions))]);
     x_et = addwav(readwav(et, akey, rev_root), readwav(dt, akey, rev_root));
     savewav(x_et, [revmix_root et{1}(akey)], sfreq);
   end
@@ -69,7 +70,9 @@ for ii=2:length(wavscps)
 end
 
 function x = soundread(fname)
-  disp(fname)
+  fname = strrep(fname, 'MC_WSJ_AV_Dev', 'REVERB_Real_dt_et');
+  fname = strrep(fname, 'MC_WSJ_AV_Eval', 'REVERB_Real_dt_et');
+  disp(['Reading: ',fname]);    
   x = audioread(fname);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
