@@ -69,11 +69,8 @@ for ii=2:length(wavscps)
 end
 
 function x = soundread(fname)
-if exist('audioread')
+  disp(fname)
   x = audioread(fname);
-else
-  x = wavread(fname);
-end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 function x_et = addwav(x_et, x_dt)
@@ -91,11 +88,7 @@ path = fileparts(fname);
 if isempty(dir(path))
   mkdir(path);
 end
-if exist('audiowrite')
-  audiowrite(fname, x, sfreq);
-else
-  wavwrite(x, sfreq, fname);
-end
+audiowrite(fname, x, sfreq);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 function l=strsplit0(astr)

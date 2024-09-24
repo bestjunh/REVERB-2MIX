@@ -90,17 +90,9 @@ end
 %%%%
 function [y]=wavread_gen(fname)
 
-if exist('wavread')
-  y=wavread(fname);
-else
   y=audioread(fname);
-end
 
 %%%%
 function [y]=wavwrite_gen(x,sfreq,fname)
-
-if exist('wavwrite')
-  wavwrite(x,sfreq,fname);
-else
+  
   audiowrite(fname,x,sfreq);
-end

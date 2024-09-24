@@ -262,18 +262,9 @@ y=y(1:1:Ly);               % Take just the first N elements
 
 %%%%
 function [y]=wavread_gen(fname)
-
-if exist('wavread')
-  y=wavread(fname);
-else
-  y=audioread(fname);
-end
+    y=audioread(fname);
 
 %%%%
 function [y]=wavwrite_gen(x,sfreq,fname)
 
-if exist('wavwrite')
-  wavwrite(x,sfreq,fname);
-else
-  audiowrite(fname,x,sfreq);
-end
+    audiowrite(fname,x,sfreq);

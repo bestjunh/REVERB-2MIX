@@ -30,7 +30,7 @@ create_link(orig_Generate_dir,'RIR');
 create_link(orig_Generate_dir,'bin');
 create_link(orig_Generate_dir,'etc');
 
-Generate_realDataMix_et(REVERB_dir, REVERB2MIX_dir);
+% Generate_realDataMix_et(REVERB_dir, REVERB2MIX_dir);
 Generate_simuDataMix_et(WSJ_dir, REVERB2MIX_dir);
 
 %%%%
