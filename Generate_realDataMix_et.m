@@ -93,7 +93,8 @@ function x = soundread(fname)
 %%%%%%%%%%%%%%%%%%%%%%%%%
 function [x_mix,x_et,x_dt] = addwav(x_et, x_dt)
 if length(x_et) > length(x_dt)
-  x_et = x_et(1:length(x_dt),:);
+  % x_et = x_et(1:length(x_dt),:);
+  x_dt = [x_dt; zeros(length(x_et)-length(x_dt),size(x_dt,2))];
 else
   x_dt = x_dt(1:length(x_et),:);
 end
