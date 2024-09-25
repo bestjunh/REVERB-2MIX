@@ -47,6 +47,4 @@ if 0
     plot(debugAzi,'o');
     title(num2str(max_azi))
 end
-
-toc
 end

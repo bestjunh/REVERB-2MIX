@@ -177,9 +177,16 @@ for i=1:2 % i=1 corresponds to "near" and i=2 to "far"
                   eval(['wavwrite_gen(y(:,',num2str(name_rule(ch)),'),16000,''',save_dir_i fname,'_ch',num2str(ch),'.wav'');'])
                 end
             else % save all 8ch data to a single wav file
+
+                [azi_et,~] = runSVDPHAT(s(:,name_rule,1),stft_init,svdphat_init);
+                [azi_dt,~] = runSVDPHAT(s(:,name_rule,2),stft_init,svdphat_init);
+
                 wavwrite_gen(y(:,name_rule),16000,[save_dir_i fname '_ch' num2str(1) '.wav']);
                 wavwrite_gen(s(:,name_rule,1),16000,[save_dir_i_et fname '_ch' num2str(1) '.wav']);
                 wavwrite_gen(s(:,name_rule,2),16000,[save_dir_i_dt fname '_ch' num2str(1) '.wav']);
+
+                save([save_dir_i_et fname '_ch' num2str(1) '.mat'],'azi_et')
+                save([save_dir_i_dt fname '_ch' num2str(1) '.mat'],'azi_dt')
             end
             display(['sentence ',num2str(fcount),' (out of 1088) finished! Saved under ',save_dir_i,' (Evaluation test set)'])
 
