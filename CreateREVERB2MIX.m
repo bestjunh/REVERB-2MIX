@@ -1,4 +1,4 @@
-function CreateREVERB2MIX(WSJ_dir, REVERB_dir, REVERB2MIX_dir)
+function CreateREVERB2MIX(WSJ_dir, REVERB_dir, REVERB2MIX_dir,stft_init,svdphat_init)
 %
 % Input variables:
 %    WSJ_dir: string name of user's clean wsjcam0 corpus directory 
@@ -30,8 +30,8 @@ create_link(orig_Generate_dir,'RIR');
 create_link(orig_Generate_dir,'bin');
 create_link(orig_Generate_dir,'etc');
 
-Generate_realDataMix_et(REVERB_dir, REVERB2MIX_dir);
-Generate_simuDataMix_et(WSJ_dir, REVERB2MIX_dir);
+Generate_realDataMix_et(REVERB_dir, REVERB2MIX_dir,stft_init,svdphat_init);
+Generate_simuDataMix_et(WSJ_dir, REVERB2MIX_dir,stft_init,svdphat_init);
 
 %%%%
 function create_link(rootdir, fname)

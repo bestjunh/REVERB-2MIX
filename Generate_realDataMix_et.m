@@ -1,4 +1,4 @@
-function Generate_realDataMix_et(REVERB_dir_name, REVERB2MIX_dir_name)
+function Generate_realDataMix_et(REVERB_dir_name, REVERB2MIX_dir_name, stft_init,svdphat_init)
 %
 % Input variables:
 %    WSJ_dir_name: string name of user's clean wsjcam0 corpus directory 
@@ -33,9 +33,18 @@ for kk = 1:length(rev_conditions)
     akey = K{ii};
     disp(['Processing: ' num2str(ii) '/' num2str(length(K)) ' ' num2str(kk) '/' num2str(length(rev_conditions))]);
     [x_mix,x_et,x_dt] = addwav(readwav(et, akey, rev_root), readwav(dt, akey, rev_root));
+
+    [azi_et,~] = runSVDPHAT(x_et,stft_init,svdphat_init);
+    [azi_dt,~] = runSVDPHAT(x_dt,stft_init,svdphat_init);
+
+
     savewav(x_mix, [revmix_root et{1}(akey)], sfreq);
     savewav(x_et, [revmix_root_et et{1}(akey)], sfreq);
     savewav(x_dt, [revmix_root_dt et{1}(akey)], sfreq);
+
+    save(strrep([revmix_root_et et{1}(akey)],'.wav','.mat'),'azi_et')
+    save(strrep([revmix_root_dt et{1}(akey)],'.wav','.mat'),'azi_dt')
+    
   end
 end
 

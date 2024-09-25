@@ -1,0 +1,6 @@
+[submodule "STFT-ISTFT_batch"]
+	path = STFT-ISTFT_batch
+	url = https://github.com/bestjunh/STFT-ISTFT_batch.git
+[submodule "MSVD-PHAT"]
+	path = MSVD-PHAT
+	url = https://github.com/IIP-Sogang/MSVD-PHAT.git
