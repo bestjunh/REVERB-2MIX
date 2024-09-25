@@ -1,4 +1,4 @@
-function Generate_simuDataMix_et(WSJ_dir_name,save_dir)
+function Generate_simuDataMix_et(WSJ_dir_name,save_dir,stft_init,svdphat_init)
 %
 % Input variables:
 %    WSJ_dir_name: string name of user's WSJCAM0 directory
