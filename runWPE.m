@@ -1,14 +1,17 @@
-function [y,st] = runWPE(x)
+function [y,st] = runWPE(x,stft_init)
 
-nwin = 512;
-nfft = nwin;
-fs = 16000;
-nch = 8;
+nwin = stft_init.nwin;
+nfft = stft_init.nfft;
+fs = stft_init.fs;
+nch = stft_init.nch;
+nshift = stft_init.nshift;
+nol = stft_init.nol;
+nhfft = stft_init.nhfft;
+win = stft_init.win;
 
-nol = fix(3*nwin/4); nshift = nwin-nol; nhfft = nfft/2+1;
-win = hanning(nwin,'periodic');
-win = win./sqrt(sum(win.^2)/nshift);
+
 nFrame = fix((length(x(:,1))+nwin)/nshift) - 2;
+
 X = zeros(nFrame, nhfft, nch);
 for ch = 1 : nch
     [X_,~,a_,p_] = my_stft(x(:,ch), nfft, win, nol, fs); % [ frame freq mic ]

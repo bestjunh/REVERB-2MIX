@@ -25,11 +25,11 @@ REVERB_dir = [nasPath 'user/byungjoon/DB/REVERB/']
 REVERB2MIX_dir = [devDataPath '/albert/DB/REVERB-2MIX_et_dt_v2/']
 
 %%
-nwin = 2048;
+nwin = 512;
 nfft = nwin;
 fs = 16000;
 nch = 8;
-nshift = fix(nwin/2);
+nshift = fix(nwin/4);
 % By-product
 nol = nwin-nshift; nhfft = nfft/2+1;
 if nwin/nshift == 2
@@ -69,7 +69,7 @@ svdphat_init.locSensors = locSensors;
 svdphat_init.gamma = 0.6;
 svdphat_init.epsi = 1E-8;
 svdphat_init.freqIdxRange = 1:1:svdphat_init.nfft/2+1;
-svdphat_init.delta = 0;
+svdphat_init.delta = 1e-10;
 svdphat_init.Nmax = 1;
 svdphat_init.thr = [0.0];%[0.6 0.6 1 1];
 svdphat_init.nullval = 10000;
