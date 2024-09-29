@@ -35,7 +35,7 @@ for kk = 1:length(rev_conditions)
     [x_mix,x_et,x_dt] = addwav(readwav(et, akey, rev_root), readwav(dt, akey, rev_root));
 
     [x_wpe_et, st_et] = runWPE(x_et);
-    [x_wpe_dt, st_dt] = runWPE(x_et);
+    [x_wpe_dt, st_dt] = runWPE(x_dt);
 
     [azi_et,~] = runSVDPHAT(x_wpe_et,stft_init,svdphat_init);
     [azi_dt,~] = runSVDPHAT(x_wpe_dt,stft_init,svdphat_init);
