@@ -31,6 +31,7 @@ st = zeros(nch,nhfft);
 for freq = 1:nhfft
     Yfreq = squeeze(Y(:,freq,:)).';
     YY = Yfreq*Yfreq';
+    YY = 0.5*(YY+YY');
     [V,D] = eig(YY);
     [~,idx] = max(diag(D));
     st(:,freq) = V(:,idx);
