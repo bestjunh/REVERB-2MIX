@@ -4,6 +4,10 @@ sfreq = 16000;
 nMic = 8;
 
 akey = K{ii};
+% if strcmp(akey,'AMI_WSJ22-Array1-6_T22c020e')
+% else
+%     return
+% end
 disp(['Processing: ' num2str(ii) '/' num2str(length(K))]);
 [x_mix,x_et,x_dt] = addwav(readwav(et, akey, rev_root), readwav(dt, akey, rev_root));
 

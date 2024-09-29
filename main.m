@@ -22,7 +22,7 @@ end
 %%
 WSJ_dir = [nasPath 'user/byungjoon/DB/REVERB/wsjcam0/']
 REVERB_dir = [nasPath 'user/byungjoon/DB/REVERB/']
-REVERB2MIX_dir = [devDataPath '/albert/DB/REVERB-2MIX_et_dt_v2.0.0/']
+REVERB2MIX_dir = [devDataPath '/albert/DB/REVERB-2MIX_et_dt_v2.0/']
 
 %%
 nwin = 512;
