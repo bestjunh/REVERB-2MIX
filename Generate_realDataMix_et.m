@@ -34,16 +34,19 @@ for kk = 1:length(rev_conditions)
     disp(['Processing: ' num2str(ii) '/' num2str(length(K)) ' ' num2str(kk) '/' num2str(length(rev_conditions))]);
     [x_mix,x_et,x_dt] = addwav(readwav(et, akey, rev_root), readwav(dt, akey, rev_root));
 
-    [azi_et,~] = runSVDPHAT(x_et,stft_init,svdphat_init);
-    [azi_dt,~] = runSVDPHAT(x_dt,stft_init,svdphat_init);
+    [x_wpe_et, st_et] = runWPE(x_et);
+    [x_wpe_dt, st_dt] = runWPE(x_et);
+
+    [azi_et,~] = runSVDPHAT(x_wpe_et,stft_init,svdphat_init);
+    [azi_dt,~] = runSVDPHAT(x_wpe_dt,stft_init,svdphat_init);
 
 
     savewav(x_mix, [revmix_root et{1}(akey)], sfreq);
     savewav(x_et, [revmix_root_et et{1}(akey)], sfreq);
     savewav(x_dt, [revmix_root_dt et{1}(akey)], sfreq);
 
-    save(strrep([revmix_root_et et{1}(akey)],'.wav','.mat'),'azi_et')
-    save(strrep([revmix_root_dt et{1}(akey)],'.wav','.mat'),'azi_dt')
+    save(strrep([revmix_root_et et{1}(akey)],'.wav','.mat'),'azi_et','st_et')
+    save(strrep([revmix_root_dt et{1}(akey)],'.wav','.mat'),'azi_dt','st_dt')
     
   end
 end

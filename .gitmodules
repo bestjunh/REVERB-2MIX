@@ -4,3 +4,6 @@
 [submodule "MSVD-PHAT"]
 	path = MSVD-PHAT
 	url = https://github.com/IIP-Sogang/MSVD-PHAT.git
+[submodule "WPE-batch"]
+	path = WPE-batch
+	url = https://github.com/bestjunh/Weighted-Prediction-Error-based-Dereverberation-batch.git

@@ -5,6 +5,7 @@ restoredefaultpath
 addpath('STFT-ISTFT_batch')
 addpath('MSVD-PHAT/MATLAB/class/')
 addpath('MSVD-PHAT/MATLAB/common/')
+addpath('WPE-batch/src/')
 %%
 if ispc
     nasPath = 'Z:/nas1_data/';
@@ -21,7 +22,7 @@ end
 %%
 WSJ_dir = [nasPath 'user/byungjoon/DB/REVERB/wsjcam0/']
 REVERB_dir = [nasPath 'user/byungjoon/DB/REVERB/']
-REVERB2MIX_dir = [devDataPath '/albert/DB/REVERB-2MIX_et_dt/']
+REVERB2MIX_dir = [devDataPath '/albert/DB/REVERB-2MIX_et_dt_v2/']
 
 %%
 nwin = 2048;

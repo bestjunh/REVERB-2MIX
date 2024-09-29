@@ -22,6 +22,7 @@ svdphat = class_SVD_PHAT(svdphat_init);
 accMap = zeros(svdphat.Q,1);
 debugAzi = zeros(nFrame,1);
 debugEle = zeros(nFrame,1);
+debugVal = zeros(nFrame,1);
 
 for frame = 1:nFrame
 
@@ -35,6 +36,7 @@ for frame = 1:nFrame
 
     debugAzi(frame) = max_azi;
     debugEle(frame) = max_ele;
+    debugVal(frame) = idx_val(2);
 
 end
 
@@ -46,5 +48,8 @@ if 0
     figure;
     plot(debugAzi,'o');
     title(num2str(max_azi))
+    figure;
+    stem(debugVal)
+    
 end
 end

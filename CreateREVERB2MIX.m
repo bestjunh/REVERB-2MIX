@@ -31,7 +31,7 @@ create_link(orig_Generate_dir,'bin');
 create_link(orig_Generate_dir,'etc');
 
 Generate_realDataMix_et(REVERB_dir, REVERB2MIX_dir,stft_init,svdphat_init);
-Generate_simuDataMix_et(WSJ_dir, REVERB2MIX_dir,stft_init,svdphat_init);
+% Generate_simuDataMix_et(WSJ_dir, REVERB2MIX_dir,stft_init,svdphat_init);
 
 %%%%
 function create_link(rootdir, fname)
